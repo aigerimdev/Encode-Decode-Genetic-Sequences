@@ -48,17 +48,18 @@ def categorize_strand(strand):
     is_t_present = False
     is_u_present = False
 
-    for index in range(0, len(strand) - 1, 4):
-        base = strand[index]
+    for base in strand:  # Loop through every character
         if base == "T":
             is_t_present = True
-
         if base == "U":
             is_u_present = True
 
-    has_both_bases = is_t_present and is_u_present
-    has_neither_base = (not is_t_present) and (not is_u_present)
-    if (has_both_bases or has_neither_base):
-        return -1
+    #Correctly check for both "T" and "U" first
+    if is_t_present and is_u_present:
+        return -1  #Both T and U present → Undetermined
 
-    return 0 if is_t_present else 1
+    #Check for neither "T" nor "U"
+    if not is_t_present and not is_u_present:
+        return -1  #No T or U → Undetermined
+
+    return 0 if is_t_present else 1  #DNA (0) or RNA (1)

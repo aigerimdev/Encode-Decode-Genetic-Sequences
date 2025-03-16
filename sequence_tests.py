@@ -12,7 +12,7 @@ ENCODED_NEITHER_BASE = "C3A5G4C5G4A4C4G5A3C3G4A4C5"
 
 def tests():
     part_one_tests()
-    # part_two_tests()
+    part_two_tests()
     print("All tests passed!\n")
 
 def part_one_tests():
@@ -22,7 +22,7 @@ def part_one_tests():
 
 def dna_tests():
     result = encode_strand(DNA)
-    assert result == DNA_ENCODED
+    assert result == DNA_ENCODED  
 
     result = decode_strand(DNA_ENCODED)
     assert result == DNA

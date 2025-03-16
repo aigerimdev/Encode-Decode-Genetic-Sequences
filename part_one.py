@@ -14,10 +14,18 @@ def driver():
     categorized_sequences["undetermined"] = [] # strands that can't be determined
     categorized_sequences["dna"] = [] # dna strands
     categorized_sequences["rna"] = [] # rna strands
-
+# The issue is that category is returned as an integer (0, 1, or -1) from categorize_strand(sequence), but categorized_sequences uses string keys ("dna", "rna", and "undetermined")
+#Since the dictionary keys are strings, using an integer key (0, 1, or -1) causes a KeyError.
     for sequence in all_sequences:
         category = categorize_strand(sequence)
-        categorized_sequences[category].append(sequence)
+        #bug==> Map numeric category to corresponding dictionary key
+        if category == 0:
+            category_key = "dna"
+        elif category == 1:
+            category_key = "rna"
+        else:
+            category_key = "undetermined"
+        categorized_sequences[category_key].append(sequence)
 
     print("-------------------------")
     print("Encoding sequences for storage...")
@@ -32,8 +40,8 @@ def driver():
     print("-------------------------")
     print("Listing undetermined sequences for review...")
     print("-------------------------")
-
-    for sequence in categorized_sequences[-1]:
+#bug3==>prints uncategorized sequenses. 
+    for sequence in categorized_sequences["undetermined"]:
         print(sequence)
 
 # Returns 0 for DNA (Contains "T" bases)
@@ -69,10 +77,13 @@ def encode_strand(strand):
     for index in range(1, len(strand)):
         if strand[index - 1] == strand[index]:
             count += 1
-        else:
-            new_entry = strand[index - 1] + count
+        else:#If a new character is found, store the previous character with its count
+            new_entry = strand[index - 1] + str(count)# small bug==> converts the count into a string.
             encoding.append(new_entry)
             count = 1
+    #bug==> Add the last character and its count after the loop. Actually we were not storing data in our encoding list  
+    new_entry = strand[-1] + str(count)
+    encoding.append(new_entry)
 
     return "".join(encoding)
 
@@ -89,3 +100,4 @@ def decode_strand(encoding):
         strand.extend(next_base)
 
     return "".join(strand)
+driver()
