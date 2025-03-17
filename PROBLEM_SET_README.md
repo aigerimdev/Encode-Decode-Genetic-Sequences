@@ -14,7 +14,7 @@ Dahlia's code can either be ran in test mode or production mode. To run the proj
 
 Dahlia knows that:
 - Every genetic sequence (both DNA & RNA) can contain the letters G, A, and C. 
-- Only DNA can contain the character T  
+- Only DNA can contain the character T.
 - Only RNA can contain the character U.
 
 Dahlia wants to use these facts to sort the sequences by placing all sequences that contain T in a DNA list, and all sequences that contain U in a RNA list. 

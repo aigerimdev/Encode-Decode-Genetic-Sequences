@@ -4,10 +4,10 @@ def driver():  # The main function that runs the program
     print("-------------------------")
 ## List of DNA/RNA sequences
     all_sequences = [
-        "GGGGGAAAGGCCCCTTTAAAACCCCTTTTTAAAACCCCCGGGAAAATTTTAAA",
-        "GGGGGAAAUUCCCCTTTAAAACCCCUUUUUAAAACCCCCGGGAAAATTTTAAA",
-        "CCCAAAAATTTTCCCCGGGTTAAAATTTTTGGGGGAAACCCGGGGAAAACCCCC",
-        "CCCAAAAAGGGGCCCCCGGGGAAAACCCCGGGGGAAACCCGGGGAAAACCCCC"
+        "GGGGGAAAGGCCCCTTTAAAACCCCTTTTTAAAACCCCCGGGAAAATTTTAAA",#dna
+        "GGGGGAAAUUCCCCTTTAAAACCCCUUUUUAAAACCCCCGGGAAAATTTTAAA",#uncateg
+        "CCCAAAAATTTTCCCCGGGTTAAAATTTTTGGGGGAAACCCGGGGAAAACCCCC",#dna
+        "CCCAAAAAGGGGCCCCCGGGGAAAACCCCGGGGGAAACCCGGGGAAAACCCCC"#uncateg
     ]
 # Dictionary to store categorized sequences
     categorized_sequences = {}
@@ -15,6 +15,12 @@ def driver():  # The main function that runs the program
     categorized_sequences["dna"] = [] # dna sequances
     categorized_sequences["rna"] = [] # rna sequanses
     
+    #another way of defining diction
+    # categorized_sequences = {
+    #     "undetermined": [],
+    #     "dna":[],
+    #     'rna':[]
+    # }
 # The issue is that category is returned as an integer (0, 1, or -1) from categorize_strand(sequence), but categorized_sequences uses string keys ("dna", "rna", and "undetermined")
 #Since the dictionary keys are strings, using an integer key (0, 1, or -1) causes a KeyError.
 # Loop through each sequence and categorize it
@@ -56,7 +62,7 @@ def categorize_strand(strand): # Function to categorize a strand
     is_t_present = False  # Track if "T" exists
     is_u_present = False # Track if "U" exists
 
-    for base in strand: # Loop through each character in the sequence
+    for base in strand: # Loop through each character in the sequence  (leter in sequence)
         if base == "T":
             is_t_present = True
 
@@ -78,7 +84,7 @@ def encode_strand(strand):
     encoding = [] # List to store encoded data
     count = 1 # Count occurrences of each letter
 
-    for index in range(1, len(strand)): # Start from second character
+    for index in range(1, len(strand)): # Start from second character  "GGGGGAGGCCCCTTTAAAACCCCTTTTTAAAACCCCCGGGAAAATTTTAAA"
         if strand[index - 1] == strand[index]: # If same as previous letter
             count += 1  # Increase count
         else:#If a new character is found, store the previous character with its count

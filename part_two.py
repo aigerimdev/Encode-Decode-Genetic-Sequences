@@ -65,4 +65,8 @@ def categorize_strand(strand):
         return -1  #No T or U → Undetermined
 
     return 0 if is_t_present else 1  # Return 0 for DNA, 1 for RNA
-driver()
+
+#  has_both_bases = is_t_present and is_u_present
+    # has_neither_base = (not is_t_present) and (not is_u_present)
+    # if (has_both_bases or has_neither_base):
+    #     return -1
